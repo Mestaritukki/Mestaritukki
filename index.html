@@ -1,25 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Treidly Logo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>mestaritukki.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
-    body {
+    html, body {
       margin: 0;
-      background: #0f1115; /* change if you want */
-      display: grid;
-      place-items: center;
-      height: 100vh;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #050007;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     }
-    img {
-      max-width: 320px;
-      width: 80%;
-      height: auto;
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      display: block;
+    }
+
+    #matrix {
+      z-index: 0;
+    }
+
+    #textCanvas {
+      z-index: 1;
+      pointer-events: none;
     }
   </style>
 </head>
+
 <body>
-  <img src="logo.png" alt="Treidly logo">
+
+<canvas id="matrix"></canvas>
+<canvas id="textCanvas"></canvas>
+
+<script>
+/* ================= MATRIX BACKGROUND ================= */
+
+const matrix = document.getElementById("matrix");
+const mtx = matrix.getContext("2d");
+
+const textCanvas = document.getElementById("textCanvas");
+const ctx = textCanvas.getContext("2d");
+
+const matrixFontSize = 16;
+let columns = 0;
+let drops = [];
+
+function resize() {
+  matrix.width = window.innerWidth;
+  matrix.height = window.innerHeight;
+  textCanvas.width = window.innerWidth;
+  textCanvas.height = window.innerHeight;
+
+  columns = Math.floor(matrix.width / matrixFontSize);
+  drops = Array.from({ length: columns }, () => ({
+    y: Math.random() * matrix.height,
+    pause: 0
+  }));
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+function drawMatrix() {
+  mtx.fillStyle = "rgba(5, 0, 7, 0.08)";
+  mtx.fillRect(0, 0, matrix.width, matrix.height);
+
+  mtx.fillStyle = "#9b5cff";
+  mtx.font = matrixFontSize + "px monospace";
+
+  drops.forEach((drop, i) => {
+    if (drop.pause > 0) {
+      drop.pause--;
+      drop.y += matrixFontSize;
+      return;
+    }
+
+    if (Math.random() < 0.03) {
+      drop.pause = Math.floor(Math.random() * 6) + 2;
+    }
+
+    const char = Math.random() > 0.5 ? "1" : "0";
+    mtx.fillText(char, i * matrixFontSize, drop.y);
+
+    drop.y += matrixFontSize;
+
+    if (drop.y > matrix.height) {
+      drop.y = Math.random() * -200;
+    }
+  });
+}
+
+setInterval(drawMatrix, 50);
+
+/* ================= TEXT OVERLAY ================= */
+
+let mouseX = -1000;
+let mouseY = -1000;
+
+window.addEventListener("mousemove", e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function drawText() {
+  ctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
+
+  const text = "MESTARITUKKI";
+  const size = Math.min(textCanvas.width * 0.085, 90);
+
+  ctx.save();
+  ctx.translate(textCanvas.width / 2, textCanvas.height / 2);
+
+  ctx.font = `900 ${size}px system-ui, sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  /* Outline-only text */
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "#f5f3ff";
+  ctx.shadowColor = "rgba(155, 92, 255, 0.6)";
+  ctx.shadowBlur = 20;
+  ctx.strokeText(text, 0, 0);
+
+  /* Smooth radial disappearance */
+  ctx.globalCompositeOperation = "destination-out";
+
+  const x = mouseX - textCanvas.width / 2;
+  const y = mouseY - textCanvas.height / 2;
+
+  const innerRadius = 40;   // 100% gone
+  const outerRadius = 180;  // fully visible again
+
+  const gradient = ctx.createRadialGradient(
+    x, y, innerRadius,
+    x, y, outerRadius
+  );
+
+  gradient.addColorStop(0, "rgba(0,0,0,1)");
+  gradient.addColorStop(0.4, "rgba(0,0,0,0.9)");
+  gradient.addColorStop(1, "rgba(0,0,0,0)");
+
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(x, y, outerRadius, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+
+  requestAnimationFrame(drawText);
+}
+
+drawText();
+</script>
+
 </body>
 </html>
