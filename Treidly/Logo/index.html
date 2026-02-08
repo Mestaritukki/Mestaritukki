@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Treidly Logo Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #161a22;
+      --text: #e6e6e6;
+      --muted: #9aa0aa;
+      --accent: #cfd3ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+
+    header {
+      padding: 28px 16px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    header p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    h2 {
+      margin: 36px 8px 12px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .logo-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-card img {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+    }
+
+    .caption {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-align: center;
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Treidly Logos</h1>
+  <p>PNG logo variants by color</p>
+</header>
+
+<main>
+
+<!-- WHITE / LIGHT -->
+<h2>White / Light</h2>
+<div class="grid">
+  <div class="logo-card"><img src="PNG_LOGO_WHITE.png"><div class="caption">PNG_LOGO_WHITE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_WHITE_MAGENTA.png"><div class="caption">PNG_LOGO_WHITE_MAGENTA.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_WHITE_ROYAL.png"><div class="caption">PNG_LOGO_WHITE_ROYAL.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_WHITE_TEAL.png"><div class="caption">PNG_LOGO_WHITE_TEAL.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_ROYAL_WHITE.png"><div class="caption">PNG_LOGO_ROYAL_WHITE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_PURPLE_WHITE.png"><div class="caption">PNG_LOGO_PURPLE_WHITE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_MAGENTA_WHITE.png"><div class="caption">PNG_LOGO_MAGENTA_WHITE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_TEAL_WHITE.png"><div class="caption">PNG_LOGO_TEAL_WHITE.png</div></div>
+</div>
+
+<!-- BLACK / DARK -->
+<h2>Black / Dark</h2>
+<div class="grid">
+  <div class="logo-card"><img src="PNG_LOGO_BLACK.png"><div class="caption">PNG_LOGO_BLACK.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_BLACK_MAGENTA.png"><div class="caption">PNG_LOGO_BLACK_MAGENTA.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_BLACK_YELLOW.png"><div class="caption">PNG_LOGO_BLACK_YELLOW.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_BLACK_nGREEN.png"><div class="caption">PNG_LOGO_BLACK_nGREEN.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_nGREEN_BLACK.png"><div class="caption">PNG_LOGO_nGREEN_BLACK.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_MAGENTA_BLACK.png"><div class="caption">PNG_LOGO_MAGENTA_BLACK.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_CHARCOAL_LIME.png"><div class="caption">PNG_LOGO_CHARCOAL_LIME.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_LIME_CHARCOAL.png"><div class="caption">PNG_LOGO_LIME_CHARCOAL.png</div></div>
+</div>
+
+<!-- BLUE -->
+<h2>Blue</h2>
+<div class="grid">
+  <div class="logo-card"><img src="PNG_LOGO_BLUE.png"><div class="caption">PNG_LOGO_BLUE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_BLUE_INVERTED.png"><div class="caption">PNG_LOGO_BLUE_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_BLUE.png"><div class="caption">PNG_LOGO_DARK_BLUE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_BLUE_INVERTED.png"><div class="caption">PNG_LOGO_DARK_BLUE_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_NAVY_CYAN.png"><div class="caption">PNG_LOGO_NAVY_CYAN.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_CYAN_NAVY.png"><div class="caption">PNG_LOGO_CYAN_NAVY.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_BLUE_ORANGE.png"><div class="caption">PNG_LOGO_BLUE_ORANGE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_ORANGE_BLUE.png"><div class="caption">PNG_LOGO_ORANGE_BLUE.png</div></div>
+</div>
+
+<!-- GREEN / TEAL -->
+<h2>Green / Teal</h2>
+<div class="grid">
+  <div class="logo-card"><img src="PNG_LOGO_GREEN.png"><div class="caption">PNG_LOGO_GREEN.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_GREEN_INVERTED.png"><div class="caption">PNG_LOGO_GREEN_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_EMERALD_MAGENTA.png"><div class="caption">PNG_LOGO_EMERALD_MAGENTA.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_MAGENTA_EMERALD.png"><div class="caption">PNG_LOGO_MAGENTA_EMERALD.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_PETROL.png"><div class="caption">PNG_LOGO_PETROL.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_PETROL_INVERTED.png"><div class="caption">PNG_LOGO_PETROL_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_TEAL_CORAL.png"><div class="caption">PNG_LOGO_TEAL_CORAL.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_CORAL_TEAL.png"><div class="caption">PNG_LOGO_CORAL_TEAL.png</div></div>
+</div>
+
+<!-- PURPLE / VIOLET -->
+<h2>Purple / Violet</h2>
+<div class="grid">
+  <div class="logo-card"><img src="PNG_LOGO_PURPLE.png"><div class="caption">PNG_LOGO_PURPLE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_PURPLE_INVERTED.png"><div class="caption">PNG_LOGO_PURPLE_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_PURPLE.png"><div class="caption">PNG_LOGO_DARK_PURPLE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_PURPLE_INVERTED.png"><div class="caption">PNG_LOGO_DARK_PURPLE_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_INDIGO_AMBER.png"><div class="caption">PNG_LOGO_INDIGO_AMBER.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_AMBER_INDIGO.png"><div class="caption">PNG_LOGO_AMBER_INDIGO.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_VIOLET_ACID.png"><div class="caption">PNG_LOGO_VIOLET_ACID.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_ACID_VIOLET.png"><div class="caption">PNG_LOGO_ACID_VIOLET.png</div></div>
+</div>
+
+<!-- PINK / MAGENTA -->
+<h2>Pink / Magenta</h2>
+<div class="grid">
+  <div class="logo-card"><img src="PNG_LOGO_PINK.png"><div class="caption">PNG_LOGO_PINK.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_PINK_INVERTED.png"><div class="caption">PNG_LOGO_PINK_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_PINK.png"><div class="caption">PNG_LOGO_DARK_PINK.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_PINK_INVERTED.png"><div class="caption">PNG_LOGO_DARK_PINK_INVERTED.png</div></div>
+</div>
+
+<!-- RED / ORANGE / YELLOW -->
+<h2>Red / Orange / Yellow</h2>
+<div class="grid">
+  <div class="logo-card"><img src="PNG_LOGO_RED_CYAN.png"><div class="caption">PNG_LOGO_RED_CYAN.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_CYAN_RED.png"><div class="caption">PNG_LOGO_CYAN_RED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_ORANGE.png"><div class="caption">PNG_LOGO_ORANGE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_ORANGE_INVERTED.png"><div class="caption">PNG_LOGO_ORANGE_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_ORANGE.png"><div class="caption">PNG_LOGO_DARK_ORANGE.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_DARK_ORANGE_INVERTED.png"><div class="caption">PNG_LOGO_DARK_ORANGE_INVERTED.png</div></div>
+  <div class="logo-card"><img src="PNG_LOGO_YELLOW_BLACK.png"><div class="caption">PNG_LOGO_YELLOW_BLACK.png</div></div>
+</div>
+
+</main>
+
+</body>
+</html>
