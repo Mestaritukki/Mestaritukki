@@ -22,13 +22,51 @@
       display: block;
     }
 
-    #matrix {
-      z-index: 0;
+    #matrix { z-index: 0; }
+    #textCanvas { z-index: 1; pointer-events: none; }
+
+    /* The Link Box Container */
+    .enter-container {
+      position: absolute;
+      top: 62%; /* Default for PC */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      width: 100%;
     }
 
-    #textCanvas {
-      z-index: 1;
-      pointer-events: none;
+    .enter-link {
+      color: #f5f3ff;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      padding: 10px 25px;
+      border: 1px solid rgba(155, 92, 255, 0.5);
+      background: rgba(5, 0, 7, 0.6);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(2px);
+      white-space: nowrap;
+    }
+
+    .enter-link:hover {
+      background: #9b5cff;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(155, 92, 255, 0.8);
+      border-color: #f5f3ff;
+    }
+
+    /* MOBILE OPTIMIZATIONS */
+    @media (max-width: 768px) {
+      .enter-container {
+        top: 68%; /* Push lower on mobile to avoid title collision */
+      }
+      .enter-link {
+        font-size: 11px;
+        letter-spacing: 2px;
+        padding: 8px 18px;
+      }
     }
   </style>
 </head>
@@ -38,9 +76,12 @@
 <canvas id="matrix"></canvas>
 <canvas id="textCanvas"></canvas>
 
+<div class="enter-container">
+  <a href="/treidly/logo/index.html" class="enter-link">Check Logos</a>
+</div>
+
 <script>
 /* ================= MATRIX BACKGROUND ================= */
-
 const matrix = document.getElementById("matrix");
 const mtx = matrix.getContext("2d");
 
@@ -57,7 +98,10 @@ function resize() {
   textCanvas.width = window.innerWidth;
   textCanvas.height = window.innerHeight;
 
-  columns = Math.floor(matrix.width / matrixFontSize);
+  // Use wider spacing on mobile for better performance
+  const spacing = window.innerWidth < 768 ? 20 : matrixFontSize;
+  columns = Math.floor(matrix.width / spacing);
+  
   drops = Array.from({ length: columns }, () => ({
     y: Math.random() * matrix.height,
     pause: 0
@@ -77,7 +121,6 @@ function drawMatrix() {
   drops.forEach((drop, i) => {
     if (drop.pause > 0) {
       drop.pause--;
-      drop.y += matrixFontSize;
       return;
     }
 
@@ -86,7 +129,8 @@ function drawMatrix() {
     }
 
     const char = Math.random() > 0.5 ? "1" : "0";
-    mtx.fillText(char, i * matrixFontSize, drop.y);
+    const spacing = window.innerWidth < 768 ? 20 : matrixFontSize;
+    mtx.fillText(char, i * spacing, drop.y);
 
     drop.y += matrixFontSize;
 
@@ -99,20 +143,26 @@ function drawMatrix() {
 setInterval(drawMatrix, 50);
 
 /* ================= TEXT OVERLAY ================= */
-
 let mouseX = -1000;
 let mouseY = -1000;
 
-window.addEventListener("mousemove", e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+// Track touch for mobile as well
+const updateMouse = (e) => {
+  mouseX = e.clientX || (e.touches ? e.touches[0].clientX : -1000);
+  mouseY = e.clientY || (e.touches ? e.touches[0].clientY : -1000);
+};
+
+window.addEventListener("mousemove", updateMouse);
+window.addEventListener("touchmove", (e) => updateMouse(e), { passive: true });
 
 function drawText() {
   ctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
 
   const text = "MESTARITUKKI";
-  const size = Math.min(textCanvas.width * 0.085, 90);
+  
+  // MOBILE FIX: Ensure text doesn't get too small or too huge
+  let size = Math.min(textCanvas.width * 0.12, 90); 
+  if (textCanvas.width < 768) size = Math.max(size, 35); // Hard limit for mobile readability
 
   ctx.save();
   ctx.translate(textCanvas.width / 2, textCanvas.height / 2);
@@ -122,7 +172,7 @@ function drawText() {
   ctx.textBaseline = "middle";
 
   /* Outline-only text */
-  ctx.lineWidth = 3;
+  ctx.lineWidth = window.innerWidth < 768 ? 1.5 : 3;
   ctx.strokeStyle = "#f5f3ff";
   ctx.shadowColor = "rgba(155, 92, 255, 0.6)";
   ctx.shadowBlur = 20;
@@ -134,13 +184,11 @@ function drawText() {
   const x = mouseX - textCanvas.width / 2;
   const y = mouseY - textCanvas.height / 2;
 
-  const innerRadius = 40;   // 100% gone
-  const outerRadius = 180;  // fully visible again
+  // Adjust reveal radius for mobile touch
+  const innerRadius = window.innerWidth < 768 ? 30 : 40;
+  const outerRadius = window.innerWidth < 768 ? 120 : 180;
 
-  const gradient = ctx.createRadialGradient(
-    x, y, innerRadius,
-    x, y, outerRadius
-  );
+  const gradient = ctx.createRadialGradient(x, y, innerRadius, x, y, outerRadius);
 
   gradient.addColorStop(0, "rgba(0,0,0,1)");
   gradient.addColorStop(0.4, "rgba(0,0,0,0.9)");
@@ -152,7 +200,6 @@ function drawText() {
   ctx.fill();
 
   ctx.restore();
-
   requestAnimationFrame(drawText);
 }
 
